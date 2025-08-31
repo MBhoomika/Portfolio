@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Miduturi Bhoomika - Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3a0ca3;
+            --accent: #f72585;
+            --dark: #0a0a0a;
+            --light: #f8f9fa;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background-color: var(--dark);
+            color: var(--light);
+            overflow-x: hidden;
+        }
+        
+        /* Particle background */
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        
+        /* 3D text effect */
+        .text-3d {
+            text-shadow: 3px 3px 0px rgba(0,0,0,0.2), 
+                         6px 6px 0px rgba(0,0,0,0.1);
+        }
+        
+        /* Glowing gradient text */
+        .glow-text {
+            background: linear-gradient(90deg, var(--primary), var(--accent), var(--primary));
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shine 3s linear infinite;
+        }
+        
+        @keyframes shine {
+            0% { background-position: 0% center; }
+            100% { background-position: 200% center; }
+        }
+        
+        /* Floating animation */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        /* Holographic card effect */
+        .holographic-card {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s ease;
+        }
+        
+        .holographic-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                to bottom right,
+                rgba(255,255,255,0) 0%,
+                rgba(255,255,255,0.1) 30%,
+                rgba(255,255,255,0) 60%
+            );
+            transform: rotate(30deg);
+            transition: all 0.5s ease;
+        }
+        
+        .holographic-card:hover::before {
+            animation: shineOverlay 1.5s infinite;
+        }
+        
+        @keyframes shineOverlay {
+            0% { left: -100%; top: -100%; }
+            100% { left: 100%; top: 100%; }
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: var(--dark);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(var(--primary), var(--accent));
+            border-radius: 10px;
+        }
+        
+        /* Animated gradient border */
+        .gradient-border {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        
+        .gradient-border::before {
+            content: "";
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            z-index: -1;
+            background: linear-gradient(45deg, var(--primary), var(--accent), var(--primary));
+            background-size: 200% 200%;
+            border-radius: 12px;
+            animation: gradientBG 3s ease infinite;
+        }
+        
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        /* Skill bar animation */
+        .skill-bar {
+            animation: fillBars 2.5s ease-out forwards;
+        }
+        
+        @keyframes fillBars {
+            from { width: 0; }
+            to { width: var(--target-width); }
+        }
+        
+        /* Glow on hover */
+        .hover-glow:hover {
+            box-shadow: 0 0 15px var(--accent);
+        }
+        
+        /* Smooth scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body>
+    <!-- Particle Background -->
+    <div id="particles-js"></div>
+    
+    <!-- Morphing Blob Background Elements -->
+    <div class="blob-bg" style="top: -200px; left: -200px;"></div>
+    <div class="blob-bg" style="bottom: -200px; right: -200px;"></div>
+    
+    <!-- Navigation -->
+    <nav class="fixed w-full bg-black/50 backdrop-blur-md z-50">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex justify-between items-center h-20">
+                <a href="#home" class="text-2xl font-bold glow-text">PORTFOLIO</a>
+                <div class="hidden md:flex space-x-10">
+                    <a href="#home" class="hover:text-accent transition-all duration-300 relative group">
+                        Home
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-accent transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="#about" class="hover:text-accent transition-all duration-300 relative group">
+                        About
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-accent transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="#skills" class="hover:text-accent transition-all duration-300 relative group">
+                        Skills
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-accent transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="#projects" class="hover:text-accent transition-all duration-300 relative group">
+                        Projects
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-accent transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="#contact" class="hover:text-accent transition-all duration-300 relative group">
+                        Contact
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-accent transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                </div>
+                <button id="mobile-menu-button" class="md:hidden text-gray-300 hover:text-accent transition">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="md:hidden hidden bg-black/90 w-full px-6 py-4 backdrop-blur-lg">
+            <a href="#home" class="block py-3 hover:text-accent transition border-b border-gray-800">Home</a>
+            <a href="#about" class="block py-3 hover:text-accent transition border-b border-gray-800">About</a>
+            <a href="#skills" class="block py-3 hover:text-accent transition border-b border-gray-800">Skills</a>
+            <a href="#projects" class="block py-3 hover:text-accent transition border-b border-gray-800">Projects</a>
+            <a href="#contact" class="block py-3 hover:text-accent transition">Contact</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center pt-20 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 py-32 flex flex-col md:flex-row items-center">
+            <div class="md:w-1/2 mb-16 md:mb-0">
+                <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 text-3d">
+                    Hi, I'm <span class="glow-text">Miduturi Bhoomika</span>
+                </h1>
+                <h2 class="text-3xl md:text-4xl mb-8 text-gray-300">
+                    <span id="typing-text" class="font-medium"></span>
+                </h2>
+                <p class="text-gray-400 mb-10 max-w-lg text-lg leading-relaxed">
+                    Crafting immersive digital experiences with cutting-edge technology and innovative design. 
+                    I transform ideas into interactive realities that captivate and engage.
+                </p>
+                <div class="flex space-x-6">
+                    <a href="#projects" class="px-8 py-4 bg-gradient-to-r from-primary to-accent text-white rounded-full font-bold hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 hover:scale-105 hover-glow">
+                        Explore My Work
+                    </a>
+                    <a href="#contact" class="px-8 py-4 border-2 border-accent text-accent rounded-full font-bold hover:bg-accent hover:text-white transition-all duration-300 transform hover:-translate-y-1">
+                        Let's Connect
+                    </a>
+                </div>
+                <div class="mt-12 flex space-x-6">
+                    <div class="flex items-center">
+                        <div class="w-4 h-4 rounded-full bg-accent mr-2 animate-pulse"></div>
+                        <span class="text-gray-400">Available for work</span>
+                    </div>
+                    <div class="flex items-center">
+                        <div class="w-4 h-4 rounded-full bg-green-500 mr-2"></div>
+                        <span class="text-gray-400">Online now</span>
+                    </div>
+                </div>
+            </div>
+            <div class="md:w-1/2 flex justify-center relative">
+                <div class="relative w-72 h-72 md:w-96 md:h-96 gradient-border rounded-full overflow-hidden floating">
+                    <img src="profile1.png" alt="Miduturi Bhoomika" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-500 flex items-end p-8 text-white">
+                        <div>
+                            <p class="font-medium text-xl mb-8"></p>
+                            <p class="text-sm text-gray-300"></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="absolute -bottom-10 -left-10 w-40 h-40 bg-accent/20 rounded-full filter blur-3xl"></div>
+                <div class="absolute -top-10 -right-10 w-40 h-40 bg-primary/20 rounded-full filter blur-3xl"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-28 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-20">
+                <span class="glow-text">About Me</span>
+            </h2>
+            <div class="flex flex-col lg:flex-row items-center gap-16">
+                <div class="lg:w-2/5">
+                    <div class="holographic-card bg-black/30 p-10 rounded-2xl border border-gray-800 hover:border-accent/30 relative overflow-hidden">
+                        <div class="absolute -top-20 -right-20 w-40 h-40 bg-accent/10 rounded-full filter blur-3xl"></div>
+                        <div class="absolute -bottom-20 -left-20 w-40 h-40 bg-primary/10 rounded-full filter blur-3xl"></div>
+                        <h3 class="text-2xl font-bold mb-6">Who Am I?</h3>
+                        <p class="text-gray-400 mb-8 leading-relaxed">
+                            I am a graduate student with a strong foundation in computer science. 
+                           Throughout my academic journey, I have successfully completed 12 projects that demonstrate my proficiency in Java, HTML, CSS, SQL, and JavaScript.
+                        </p>
+                        <div class="grid grid-cols-2 gap-6">
+                            <div class="bg-black/40 p-4 rounded-xl border border-gray-800 hover:border-accent/50 transition">
+                                <div class="text-4xl text-accent mb-3">
+                                    <i class="fas fa-trophy"></i>
+                                </div>
+                                <h4 class="font-bold mb-1">12 Projects</h4>
+                                <p class="text-sm text-gray-400">Completed successfully</p>
+                            </div>
+                            <div class="bg-black/40 p-4 rounded-xl border border-gray-800 hover:border-primary/50 transition">
+                                <div class="text-4xl text-primary mb-3">
+                                    <i class="fas fa-graduation-cap"></i>
+                                </div>
+                                <h4 class="font-bold mb-1">Graduate Student</h4>
+                                <p class="text-sm text-gray-400">From Computer Science and Technology</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="lg:w-3/5">
+                    <div class="holographic-card bg-black/30 p-10 rounded-2xl border border-gray-800 hover:border-primary/30 relative overflow-hidden">
+                        <div class="absolute -top-20 -right-20 w-40 h-40 bg-primary/10 rounded-full filter blur-3xl"></div>
+                        <div class="absolute -bottom-20 -left-20 w-40 h-40 bg-accent/10 rounded-full filter blur-3xl"></div>
+                        <h3 class="text-2xl font-bold mb-6">My Journey</h3>
+                        <div class="space-y-8">
+                            <div class="flex">
+                                <div class="flex flex-col items-center mr-6">
+                                    <div class="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center text-white">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="w-0.5 h-full bg-gradient-to-b from-primary to-accent mt-2"></div>
+                                </div>
+                                <div class="pt-1">
+                                    <h4 class="font-bold text-lg mb-1">Computer Science technology</h4>
+                                    <p class="text-gray-400 mb-2">G Pulla Reddy Engineeirng College (2021-2025)</p>
+                                    <p class="text-gray-300">Specialized Computer Science with the emerging technologies.</p>
+                                </div>
+                            </div>
+                            <div class="flex">
+                                <div class="flex flex-col items-center mr-6">
+                                    <div class="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center text-white">
+                                        <i class="fas fa-briefcase"></i>
+                                    </div>
+                                    <div class="w-0.5 h-full bg-gradient-to-b from-primary to-accent mt-2"></div>
+                                </div>
+                                <div class="pt-1">
+                                    <h4 class="font-bold text-lg mb-1">Internship Experience</h4>
+                                    <p class="text-gray-400 mb-2">Global Quest Technologies (2024-Present)</p>
+                                    <p class="text-gray-300">Gaining hands-on experience in software development and project management.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-28 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-20">
+                <span class="glow-text">My Skills</span>
+            </h2>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <!-- Technical Skills -->
+                <div class="holographic-card bg-black/30 p-10 rounded-2xl border border-gray-800 hover:border-accent/30 relative overflow-hidden">
+                    <div class="absolute -top-20 -right-20 w-40 h-40 bg-accent/10 rounded-full filter blur-3xl"></div>
+                    <h3 class="text-2xl font-bold mb-8">Technical Expertise</h3>
+                    <div class="space-y-8">
+                        <div>
+                            <div class="flex justify-between mb-3">
+                                <span class="font-medium flex items-center">
+                                    <i class="fab fa-html5 text-orange-500 mr-2"></i>
+                                    <i class="fab fa-css3-alt text-blue-500 mr-2"></i>
+                                    HTML/CSS
+                                </span>
+                                <span class="text-accent">95%</span>
+                            </div>
+                            <div class="w-full bg-gray-800 rounded-full h-2.5">
+                                <div class="bg-gradient-to-r from-primary to-accent h-2.5 rounded-full skill-bar" style="--target-width:95%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-3">
+                                <span class="font-medium flex items-center">
+                                    <i class="fab fa-js-square text-yellow-400 mr-2"></i>
+                                    JavaScript
+                                </span>
+                                <span class="text-accent">90%</span>
+                            </div>
+                            <div class="w-full bg-gray-800 rounded-full h-2.5">
+                                <div class="bg-gradient-to-r from-primary to-accent h-2.5 rounded-full skill-bar" style="--target-width:90%"></div>
+                            </div>
+                        </div>
+                        <div class="mb-4">
+                            <div class="flex justify-between mb-3">
+                             <span class="font-medium flex items-center">
+                                <i class="fas fa-database text-blue-400 mr-2"></i>
+                                SQL
+                              </span>
+                              <span class="text-accent">90%</span>
+                          </div>
+                          <div class="w-full bg-gray-800 rounded-full h-2.5">
+                             <div class="bg-gradient-to-r from-primary to-accent h-2.5 rounded-full skill-bar" style="--target-width:90%"></div>
+                         </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-3">
+                                <span class="font-medium flex items-center">
+                                    <i class="fab fa-java text-green-500 mr-2"></i>
+                                    Java
+                                </span>
+                                <span class="text-accent">95%</span>
+                            </div>
+                            <div class="w-full bg-gray-800 rounded-full h-2.5">
+                                <div class="bg-gradient-to-r from-primary to-accent h-2.5 rounded-full skill-bar" style="--target-width:85%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Design & Other Skills -->
+                <div class="holographic-card bg-black/30 p-10 rounded-2xl border border-gray-800 hover:border-primary/30 relative overflow-hidden">
+                    <div class="absolute -bottom-20 -left-20 w-40 h-40 bg-primary/10 rounded-full filter blur-3xl"></div>
+                    <h3 class="text-2xl font-bold mb-8">Design & Soft Skills</h3>
+                    <div class="grid grid-cols-2 gap-6">
+                        <div class="bg-black/40 p-5 rounded-xl border border-gray-800 hover:border-accent/50 transition transform hover:-translate-y-1">
+                            <div class="text-3xl text-accent mb-3">
+                                <i class="fas fa-paint-brush"></i>
+                            </div>
+                            <h4 class="font-bold mb-2">Front-End Web Development</h4>
+                            <div class="flex mb-1">
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star-half-alt text-yellow-400"></i>
+                            </div>
+                            <p class="text-sm text-gray-400">Creating intuitive interfaces</p>
+                        </div>
+                        <div class="bg-black/40 p-5 rounded-xl border border-gray-800 hover:border-primary/50 transition transform hover:-translate-y-1">
+                            <div class="text-3xl text-primary mb-3">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <h4 class="font-bold mb-2">Team Leadership</h4>
+                            <div class="flex mb-1">
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                            </div>
+                            <p class="text-sm text-gray-400">Managing development teams</p>
+                        </div>
+                        <div class="bg-black/40 p-5 rounded-xl border border-gray-800 hover:border-accent/50 transition transform hover:-translate-y-1">
+                            <div class="text-3xl text-accent mb-3">
+                                <i class="fas fa-comments"></i>
+                            </div>
+                            <h4 class="font-bold mb-2">Communication</h4>
+                            <div class="flex mb-1">
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                            </div>
+                            <p class="text-sm text-gray-400">Client & team interactions</p>
+                        </div>
+                        <div class="bg-black/40 p-5 rounded-xl border border-gray-800 hover:border-primary/50 transition transform hover:-translate-y-1">
+                            <div class="text-3xl text-primary mb-3">
+                                <i class="fas fa-lightbulb"></i>
+                            </div>
+                            <h4 class="font-bold mb-2">Problem Solving</h4>
+                            <div class="flex mb-1">
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                            </div>
+                            <p class="text-sm text-gray-400">Creative solutions</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-28 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px=6">
+            <h2 class="text-4xl font-bold text-center mb-20">
+                <span class="glow-text">Featured Projects</span>
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Project 1 -->
+                <div class="holographic-card group overflow-hidden rounded-2xl border border-gray-800 hover:border-accent/30 transition-all duration-500 transform hover:-translate-y-2">
+                    <div class="relative overflow-hidden h-64">
+                        <img src="amacln.jpg" alt="Project 1" class="w-full h-full object-cover transition duration-700 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-6">
+                            <div>
+                                <h3 class="text-white font-bold text-xl mb-2">Amazon Clone</h3>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="px-3 py-1 bg-orange-500/20 text-orange-500 text-xs rounded-full">HTML</span>
+                                    <span class="px-3 py-1 bg-blue-500/20 text-blue-500 text-xs rounded-full">CSS</span>
+                                    <span class="px-3 py-1 bg-yellow-400/20 text-yellow-400 text-xs rounded-full">JavaScript</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-gray-400 mb-4">
+                            A full-featured e-commerce platform with product catalog, shopping cart, and payment integration.
+                        </p>
+                        <div class="flex space-x-4">
+                            <a href="https://mbhoomika.github.io/Amazon-clone3/" class="text-sm text-accent hover:text-white flex items-center transition">
+                                <i class="fas fa-external-link-alt mr-2"></i> Live Demo
+                            </a>
+                            <a href="https://github.com/MBhoomika/Amazon-clone3" class="text-sm text-primary hover:text-white flex items-center transition">
+                                <i class="fab fa-github mr-2"></i> Source Code
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 2 -->
+                <div class="holographic-card group overflow-hidden rounded-2xl border border-gray-800 hover:border-primary/30 transition-all duration-500 transform hover:-translate-y-2">
+                    <div class="relative overflow-hidden h-64">
+                        <img src="vir.webp" alt="Project 2" class="w-full h-full object-cover transition duration-700 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-6">
+                            <div>
+                                <h3 class="text-white font-bold text-xl mb-2">Serene AI</h3>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="px-3 py-1 bg-blue-500/20 text-blue-500 text-xs rounded-full">HTML</span>
+                                    <span class="px-3 py-1 bg-yellow-500/20 text-yellow-500 text-xs rounded-full">CSS</span>
+                                    <span class="px-3 py-1 bg-red-500/20 text-red-500 text-xs rounded-full">AI</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-gray-400 mb-4">
+                            Business intelligence dashboard with machine learning predictions and real-time analytics.
+                        </p>
+                        <div class="flex space-x-4">
+                            <a href="https://mbhoomika.github.io/Sereneai/" class="text-sm text-accent hover:text-white flex items-center transition">
+                                <i class="fas fa-external-link-alt mr-2"></i> Live Demo
+                            </a>
+                            <a href="https://github.com/MBhoomika/Sereneai" class="text-sm text-primary hover:text-white flex items-center transition">
+                                <i class="fab fa-github mr-2"></i> Source Code
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 3 -->
+                <div class="holographic-card group overflow-hidden rounded-2xl border border-gray-800 hover:border-accent/30 transition-all duration-500 transform hover:-translate-y-2">
+                    <div class="relative overflow-hidden h-64">
+                        <img src="book.png" alt="Project 3" class="w-full h-full object-cover transition duration-700 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-6">
+                            <div>
+                                <h3 class="text-white font-bold text-xl mb-2">SocialBook</h3>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="px-3 py-1 bg-purple-500/20 text-purple-500 text-xs rounded-full">HTML</span>
+                                    <span class="px-3 py-1 bg-indigo-500/20 text-indigo-500 text-xs rounded-full">CSS</span>
+                                    <span class="px-3 py-1 bg-green-500/20 text-green-500 text-xs rounded-full">JS</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-gray-400 mb-4">
+                            Augmented reality application for interior design visualization with 3D object placement.
+                        </p>
+                        <div class="flex space-x-4">
+                            <a href="https://mbhoomika.github.io/fbclone/" class="text-sm text-accent hover:text-white flex items-center transition">
+                                <i class="fas fa-external-link-alt mr-2"></i> Live Demo
+                            </a>
+                            <a href="https://github.com/MBhoomika/fbclone" class="text-sm text-primary hover:text-white flex items-center transition">
+                                <i class="fab fa-github mr-2"></i> Source Code
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-16">
+                <a href="projects.html" class="px-8 py-4 border-2 border-accent text-accent rounded-full font-bold hover:bg-accent hover:text-white transition-all duration-300 transform hover:-translate-y-1 inline-flex items-center">
+                    <i class="fab fa-github mr-3"></i> View All Projects
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-28 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-20">
+                <span class="glow-text">Let's Connect</span>
+            </h2>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <!-- Contact Form -->
+                <div class="holographic-card bg-black/30 p-10 rounded-2xl border border-gray-800 hover:border-accent/30 relative overflow-hidden">
+                    <div class="absolute -top-20 -right-20 w-40 h-40 bg-accent/10 rounded-full filter blur-3xl"></div>
+                    <h3 class="text-2xl font-bold mb-8">Send Me a Message</h3>
+                    <form id="contactForm" class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="name" class="block text-sm font-medium text-gray-400 mb-2">Name</label>
+                                <input type="text" id="name" name="name" class="w-full px-5 py-3 bg-black/30 border border-gray-800 rounded-xl focus:ring-2 focus:ring-accent focus:border-accent outline-none transition text-white placeholder-gray-500" placeholder="Your name" required>
+                            </div>
+                            <div>
+                                <label for="email" class="block text-sm font-medium text-gray-400 mb-2">Email</label>
+                                <input type="email" id="email" name="email" class="w-full px-5 py=3 bg-black/30 border border-gray-800 rounded-xl focus:ring-2 focus:ring-accent focus:border-accent outline-none transition text-white placeholder-gray-500" placeholder="your.email@example.com" required>
+                            </div>
+                        </div>
+                        <div>
+                            <label for="subject" class="block text-sm font-medium text-gray-400 mb-2">Subject</label>
+                            <input type="text" id="subject" name="subject" class="w-full px-5 py-3 bg-black/30 border border-gray-800 rounded-xl focus:ring-2 focus:ring-accent focus:border-accent outline-none transition text-white placeholder-gray-500" placeholder="What's this about?" required>
+                        </div>
+                        <div>
+                            <label for="message" class="block text-sm font-medium text-gray-400 mb-2">Message</label>
+                            <textarea id="message" name="message" rows="5" class="w-full px-5 py-3 bg-black/30 border border-gray-800 rounded-xl focus:ring-2 focus:ring-accent focus:border-accent outline-none transition text-white placeholder-gray-500" placeholder="Your message here..." required></textarea>
+                        </div>
+                        <div class="pt-2">
+                            <button type="submit" class="w-full px-8 py-4 bg-gradient-to-r from-primary to-accent text-white rounded-xl font-bold hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 flex items-center justify-center">
+                                <i class="fas fa-paper-plane mr-3"></i> Send Message
+                            </button>
+                            <div id="formResponse" class="mt-4 hidden text-center text-green-400 font-medium"></div>
+                        </div>
+                    </form>
+                </div>
+                
+                <!-- Contact Info -->
+                <div class="space-y-8">
+                    <div class="holographic-card bg-black/30 p-10 rounded-2xl border border-gray-800 hover:border-primary/30 relative overflow-hidden">
+                        <div class="absolute -bottom-20 -left-20 w-40 h-40 bg-primary/10 rounded-full filter blur-3xl"></div>
+                        <h3 class="text-2xl font-bold mb-8">Contact Information</h3>
+                        <ul class="space-y-6">
+                            <li class="flex items-start">
+                                <div class="w-14 h-14 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center text-white mr-6">
+                                    <i class="fas fa-map-marker-alt text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-lg mb-1">Location</h4>
+                                    <p class="text-gray-400">Kurnool, India</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="w-14 h-14 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center text-white mr-6">
+                                    <i class="fas fa-envelope text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-lg mb=1">Email</h4>
+                                    <p class="text-gray-400">bhoomikareddy402@gmail.com</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="w-14 h-14 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center text-white mr-6">
+                                    <i class="fas fa-phone-alt text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-lg mb-1">Phone</h4>
+                                    <p class="text-gray-400">8106931358</p>
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="mt-10">
+                            <h4 class="font-bold text-lg mb-4">Follow Me</h4>
+                            <div class="flex space-x-4">
+                                <a href="https://www.linkedin.com/in/miduturi-bhoomika-1815b4275/" class="w-12 h-12 rounded-full bg-black/40 border border-gray-800 hover:border-blue-600 hover:bg-blue-600/20 transition flex items-center justify-center text-white">
+                                    <i class="fab fa-linkedin-in"></i>
+                                </a>
+                                <a href="https://github.com/mbhoomika" class="w-12 h-12 rounded-full bg-black/40 border border-gray-800 hover:border-gray-700 hover:bg-gray-700/20 transition flex items-center justify-center text-white">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-16 bg-black/50 backdrop-blur-lg border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-8 md:mb-0">
+                    <a href="#" class="text-2xl font-bold glow-text">PORTFOLIO</a>
+                    <p class="mt-3 text-gray-500">© 2025 Miduturi Bhoomika. All rights reserved.</p>
+                </div>
+                <div class="flex flex-col items-center md:items-end space-y-4">
+                    <div class="flex space-x-6">
+                        <a href="#home" class="text-gray-400 hover:text-accent transition">Home</a>
+                        <a href="#about" class="text-gray-400 hover:text-accent transition">About</a>
+                        <a href="#skills" class="text-gray-400 hover:text-accent transition">Skills</a>
+                        <a href="#projects" class="text-gray-400 hover:text-accent transition">Projects</a>
+                        <a href="#contact" class="text-gray-400 hover:text-accent transition">Contact</a>
+                    </div>
+                    <p class="text-gray-500 text-sm">Made with <i class="fas fa-heart text-accent"></i> and modern web technologies</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <a href="#home" id="back-to-top" class="fixed bottom-8 right-8 w-14 h-14 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center text-white shadow-lg transform transition hover:scale-110 hover-glow hidden">
+        <i class="fas fa-arrow-up text-xl"></i>
+    </a>
+
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        // Initialize particle.js background
+        particlesJS("particles-js", {
+            "particles": {
+                "number": {
+                    "value": 80,
+                    "density": {
+                        "enable": true,
+                        "value_area": 800
+                    }
+                },
+                "color": {
+                    "value": "#3a86ff"
+                },
+                "shape": {
+                    "type": "circle",
+                    "stroke": {
+                        "width": 0,
+                        "color": "#000000"
+                    },
+                    "polygon": {
+                        "nb_sides": 5
+                    }
+                },
+                "opacity": {
+                    "value": 0.5,
+                    "random": false,
+                    "anim": {
+                        "enable": false,
+                        "speed": 1,
+                        "opacity_min": 0.1,
+                        "sync": false
+                    }
+                },
+                "size": {
+                    "value": 3,
+                    "random": true,
+                    "anim": {
+                        "enable": false,
+                        "speed": 40,
+                        "size_min": 0.1,
+                        "sync": false
+                    }
+                },
+                "line_linked": {
+                    "enable": true,
+                    "distance": 150,
+                    "color": "#4361ee",
+                    "opacity": 0.4,
+                    "width": 1
+                },
+                "move": {
+                    "enable": true,
+                    "speed": 2,
+                    "direction": "none",
+                    "random": false,
+                    "straight": false,
+                    "out_mode": "out",
+                    "bounce": false,
+                    "attract": {
+                        "enable": false,
+                        "rotateX": 600,
+                        "rotateY": 1200
+                    }
+                }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": {
+                    "onhover": {
+                        "enable": true,
+                        "mode": "grab"
+                    },
+                    "onclick": {
+                        "enable": true,
+                        "mode": "push"
+                    },
+                    "resize": true
+                },
+                "modes": {
+                    "grab": {
+                        "distance": 140,
+                        "line_linked": {
+                            "opacity": 1
+                        }
+                    },
+                    "bubble": {
+                        "distance": 400,
+                        "size": 40,
+                        "duration": 2,
+                        "opacity": 8,
+                        "speed": 3
+                    },
+                    "repulse": {
+                        "distance": 200,
+                        "duration": 0.4
+                    },
+                    "push": {
+                        "particles_nb": 4
+                    },
+                    "remove": {
+                        "particles_nb": 2
+                    }
+                }
+            },
+            "retina_detect": true
+        });
+
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+
+        // Typing animation for hero section
+        const typingText = document.getElementById('typing-text');
+        const professions = ["Full-Stack Developer", "UI/UX Designer", "Tech Innovator", "Digital Creator", "Problem Solver"];
+        let currentProfession = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        let typingSpeed = 150;
+
+        function type() {
+            const currentText = professions[currentProfession];
+            
+            if (isDeleting) {
+                typingText.textContent = currentText.substring(0, charIndex - 1);
+                charIndex--;
+                typingSpeed = 100;
+            } else {
+                typingText.textContent = currentText.substring(0, charIndex + 1);
+                charIndex++;
+                typingSpeed = 150;
+            }
+
+            if (!isDeleting && charIndex === currentText.length) {
+                isDeleting = true;
+                typingSpeed = 1000; // Pause at end of word
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                currentProfession = (currentProfession + 1) % professions.length;
+                typingSpeed = 500; // Pause before typing next word
+            }
+
+            setTimeout(type, typingSpeed);
+        }
+
+        // Start the typing effect when the page loads
+        window.addEventListener('DOMContentLoaded', type);
+
+        // Skill bar animations when scrolled into view
+        const skillBars = document.querySelectorAll('.skill-bar');
+        
+        function animateSkillBars() {
+            skillBars.forEach(bar => {
+                const width = bar.style.getPropertyValue('--target-width');
+                bar.style.width = width;
+            });
+        }
+
+        // Intersection Observer for skill bars
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateSkillBars();
+                }
+            });
+        }, { threshold: 0.1 });
+
+        skillBars.forEach(bar => {
+            observer.observe(bar);
+        });
+
+        // Contact form submission
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form values
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('message').value;
+            
+            // Validate form
+            if(!name || !email || !subject || !message) {
+                alert('Please fill all fields');
+                return;
+            }
+            
+            // Show success message
+            const response = document.getElementById('formResponse');
+            response.textContent = "Thank you for your message! I'll get back to you soon.";
+            response.classList.remove('hidden');
+            
+            // Reset form after 3 seconds
+            setTimeout(() => {
+                this.reset();
+                response.classList.add('hidden');
+            }, 3000);
+        });
+
+        // Back to top button visibility
+        window.addEventListener('scroll', function() {
+            const backToTopButton = document.getElementById('back-to-top');
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.remove('hidden');
+            } else {
+                backToTopButton.classList.add('hidden');
+            }
+        });
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    const mobileMenu = document.getElementById('mobile-menu');
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
